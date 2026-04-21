@@ -1,0 +1,187 @@
+.gift-card {
+  background: linear-gradient(180deg, #fdf7f2, #f7efe8);
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid #eaded6;
+
+  position: relative;
+
+  transition: 0.3s;
+
+  /* ✨ animação */
+  opacity: 0;
+  animation: fadeUpCard 0.6s ease forwards;
+}
+
+/* ✨ leve textura (efeito papel) */
+.gift-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+  opacity: 0.2;
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.gift-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.08);
+}
+
+/* 🖼️ imagem */
+.gift-card__image {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* 📝 título elegante */
+.gift-card__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: #5c4b44;
+  margin-bottom: 6px;
+}
+
+/* ℹ️ infos suaves */
+.gift-card__info {
+  font-size: 13px;
+  color: #8a7a73;
+}
+
+/* 🔗 link delicado */
+.gift-card__link {
+  display: inline-block;
+  margin-top: 6px;
+  color: #b08968;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+/* 📊 progresso */
+.gift-card__progress {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #5c4b44;
+  font-size: 14px;
+}
+
+/* 💎 botão elegante (SEM cor forte) */
+.gift-card__button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 10px;
+
+  border-radius: 12px;
+  border: 1px solid #d8c3b5;
+
+  background: transparent;
+  color: #5c4b44;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* hover elegante */
+.gift-card__button:hover {
+  background: #f3e8df;
+}
+
+/* desabilitado */
+.gift-card__button--disabled {
+  background: #eee;
+  color: #aaa;
+  border: none;
+  cursor: not-allowed;
+}
+
+@keyframes fadeUpCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* fundo escuro */
+/* 🔥 overlay tela inteira */
+.image-modal {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: rgba(0, 0, 0, 0.9);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+
+  animation: fadeIn 0.3s ease;
+}
+
+/* imagem grande */
+
+/* botão fechar */
+.image-modal__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background: rgba(255,255,255,0.2);
+  border: none;
+
+  color: white;
+  font-size: 22px;
+
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+/* animação */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* wrapper controla o zoom */
+.image-modal__img-wrapper {
+  max-width: 90%;
+  max-height: 85vh;
+}
+
+/* imagem */
+.image-modal__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* 💥 zoom ao passar o mouse */
+.image-modal__img-wrapper:hover .image-modal__img {
+  transform: scale(1.8);
+}
+@media (max-width: 768px) {
+  .image-modal__img-wrapper:hover .image-modal__img {
+    transform: scale(1.2);
+  }
+}
+
+body {
+  overflow-x: hidden;
+}

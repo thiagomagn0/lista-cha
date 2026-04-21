@@ -1,0 +1,113 @@
+.home {
+  height: 100vh;
+  background-image: url("public/images/foto-casal.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* 🔥 overlay sofisticado */
+.home__overlay {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: flex-start; /* 👈 IMPORTANTE */
+
+  padding-top: 230px; /* 👈 CONTROLA A ALTURA */
+    background: linear-gradient(
+    rgba(253, 250, 247, 0.6) 0%,
+    rgba(253, 250, 247, 0.85) 40%,
+    rgba(253, 250, 247, 0.95) 100%
+  );
+}
+
+/* ✨ título elegante */
+.home__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  color: #5c4b44;
+
+  text-align: center;
+  line-height: 1.2;
+
+  margin-bottom: 10px;
+}
+
+.home__title span {
+  display: block;
+}
+
+.home__subtitle {
+  color: var(--text-light);
+  margin-bottom: 40px;
+
+  animation: fadeUp 1.2s ease;
+}
+
+/* 💎 cards premium */
+.home__cards {
+  display: flex;
+  gap: 16px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  padding: 24px;
+}
+
+/* 💍 card elegante */
+.home__card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 18px 22px;
+  border-radius: 18px;
+
+  border: 1px solid #eaded6;
+
+  min-width: 160px;
+  text-align: center;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* hover leve */
+.home__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.08);
+}
+
+/* título do card */
+.home__card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #5c4b44;
+}
+
+/* subtítulo */
+.home__card-subtitle {
+  font-size: 13px;
+  color: #8a7a73;
+  margin-top: 4px;
+}
+
+.home__whatsapp {
+  margin-top: 30px;
+
+  background: #d8a48f;
+  color: white;
+
+  padding: 12px 28px;
+  border-radius: 25px;
+
+  font-weight: 500;
+
+  transition: 0.3s;
+}
+
+.home__whatsapp:hover {
+  transform: scale(1.05);
+  background: #c8937e;
+}

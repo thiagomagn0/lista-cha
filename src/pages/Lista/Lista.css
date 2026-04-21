@@ -1,0 +1,30 @@
+.lista {
+  min-height: 100vh;
+
+  background-image: url("/images/imagem_fundo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 40px 20px;
+
+  position: relative;
+}
+
+.lista::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+background: rgba(253, 250, 247, 0.534);
+
+  z-index: 0;
+}
+.lista__header,
+.lista__grid {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  z-index: 1;
+  gap: 16px;
+}

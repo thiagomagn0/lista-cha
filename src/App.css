@@ -1,0 +1,31 @@
+.app {
+  text-align: center;
+}
+
+.app__header {
+  background: linear-gradient(135deg, #fde68a, #fca5a5);
+  padding: 40px 20px;
+  color: #333;
+}
+
+.app__title {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.app__subtitle {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.app__content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
