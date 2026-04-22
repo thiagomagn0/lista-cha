@@ -10,7 +10,17 @@ export default function Confirmacao() {
   const [status, setStatus] = useState("sim");
   const navigate = useNavigate();
   const [showThankYou, setShowThankYou] = useState(false);
-    const handleSubmit = async () => {
+   const playSound = () => {
+  const audio = new Audio("/sounds/aplausos.wav");
+    audio.volume = 0.3;
+    audio.play();
+  };
+  const playSadSound2 = () => {
+  const audio = new Audio("/sounds/aww.wav");
+  audio.volume = 0.2;
+  audio.play().catch(() => {});
+};
+  const handleSubmit = async () => {
     if (!name) {
         alert("Informe seu nome");
         return;
@@ -23,10 +33,14 @@ export default function Confirmacao() {
     });
 
     
-
+    if (status === "sim") {
+      playSound();
+    } else {
+      playSadSound2();
+    }
     setName("");
-
-  
+   
+    
 
 setTimeout(() => {
   navigate("/");
@@ -35,7 +49,8 @@ setTimeout(() => {
 
   return (
     <div className="confirmacao">
-      <h1 className="confirmacao__title">Confirmação de Presença</h1>
+      <div className="confirmacao__container">
+         <h1 className="confirmacao__title">Confirmação de Presença</h1>
         <div className="content__card">
             <div className="confirmacao__card">
                 <input
@@ -63,6 +78,8 @@ setTimeout(() => {
         isOpen={showThankYou}
         onClose={() => setShowThankYou(false)}
         />
+      </div>
+     
     </div>
     
   );

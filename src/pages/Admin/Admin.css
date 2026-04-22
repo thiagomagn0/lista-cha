@@ -1,13 +1,29 @@
 .admin {
   min-height: 100vh;
+
   background-image: url("/images/imagem_fundo.png");
   background-size: cover;
   background-position: center;
-  padding: 0px 68px;
-  max-width: 500px;
-  margin: 0 auto;
-}
+  background-attachment: fixed;
 
+  display: flex;
+  justify-content: center;
+
+  padding: 16px; /* 🔥 leve e responsivo */
+}
+@media (min-width: 768px) {
+  .admin {
+    padding: 32px;
+  }
+}
+.admin__container {
+  width: 100%;
+  max-width: 500px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+}
 /* título */
 .admin__title {
   font-family: 'Playfair Display', serif;

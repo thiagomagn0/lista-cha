@@ -48,7 +48,8 @@ export default function Admin() {
 
   return (
     <div className="admin">
-      <h1 className="admin__title">Painel do Evento</h1>
+      <div className="admin__container">
+         <h1 className="admin__title">Painel do Evento</h1>
 
       {/* 📊 RESUMO */}
       <div className="admin__stats">
@@ -100,6 +101,8 @@ export default function Admin() {
           </div>
         ))}
       </div>
+      </div>
+     
     </div>
   );
 }

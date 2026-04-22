@@ -55,11 +55,11 @@ export default function Lista() {
     name: "",
     phone: "",
   });
-//   const playSound = () => {
-//   const audio = new Audio("/sounds/success.wav");
-//   audio.volume = 0.3;
-//   audio.play();
-// };
+  const playSound = () => {
+  const audio = new Audio("/sounds/aplausos.wav");
+    audio.volume = 0.3;
+    audio.play();
+  };
 const [loading, setLoading] = useState(false);
 const [showThankYou, setShowThankYou] = useState(false);
 const fetchReservas = async () => {
@@ -124,14 +124,13 @@ const handleReserve = async () => {
     setSelectedItem(null);
 
   
-   confetti({
-    particleCount: 120,
-    spread: 80,
-    origin: { y: 0.6 },
-    zIndex: 9999, // 🔥 ESSENCIAL
-  });
-    
+ confetti({ particleCount: 80, spread: 70, zIndex: 9999 });
 
+setTimeout(() => {
+  confetti({ particleCount: 50, spread: 100, zIndex: 9999 });
+}, 300);
+    
+playSound()
      
       setShowThankYou(true);
     
@@ -157,7 +156,8 @@ useEffect(() => {
 
   return (
   <div className="lista">
-    <header className="lista__header">
+    <div className="liata__container">
+            <header className="lista__header">
       <h1 className="lista__title">Lista de Presentes</h1>
       <p className="lista__subtitle">
         Escolha com carinho!
@@ -192,6 +192,8 @@ useEffect(() => {
   isOpen={showThankYou}
   onClose={() => setShowThankYou(false)}
 />
+    </div>
+
   </div>
 );
 }

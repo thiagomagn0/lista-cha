@@ -1,15 +1,29 @@
 
 .lista {
   min-height: 100vh;
+
   background-image: url("/images/imagem_fundo.png");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* 🔥 ISSO AQUI */
-  padding: 0px 55px;
-  max-width: 500px;
-  margin: 0 auto;
+  background-attachment: fixed;
 
-  position: relative;
+  display: flex;
+  justify-content: center;
+
+  padding: 16px; /* 🔥 leve e responsivo */
+}
+@media (min-width: 768px) {
+  .lista {
+    padding: 32px;
+  }
+}
+.lista__container {
+  width: 100%;
+  max-width: 500px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
 }
 
 

@@ -156,3 +156,39 @@
   font-size: 13px;
   margin-bottom: 10px;
 }
+
+.pix {
+  margin-top: 20px;
+
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(6px);
+
+  padding: 16px;
+  border-radius: 16px;
+
+  border: 1px solid #eaded6;
+
+  text-align: center;
+}
+
+.pix__title {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.pix__key {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #5c4b44;
+}
+
+.pix__button {
+  background: #d8a48f;
+  color: white;
+
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: none;
+
+  cursor: pointer;
+}
