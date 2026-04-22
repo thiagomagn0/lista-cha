@@ -128,7 +128,7 @@ const handleReserve = async () => {
 
 setTimeout(() => {
   confetti({ particleCount: 50, spread: 100, zIndex: 9999 });
-}, 300);
+}, 7000);
     
 playSound()
      
