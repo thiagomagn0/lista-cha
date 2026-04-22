@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 type Props = {
   item: GiftItem;
   onSelect: (item: GiftItem) => void;
-  onViewStores: (itemName: string) => void;
+  onViewStores: (item: GiftItem) => void;
   style?: CSSProperties;
 };
 
@@ -30,6 +30,11 @@ export function GiftCard({ item, onSelect, onViewStores, style }: Props) {
       {item.color && (
         <p className="gift-card__info">Cor: {item.color}</p>
       )}
+      {item.material && (
+        <p className="gift-card__info">
+          Material: {item.material}
+        </p>
+      )}
 
       {item.note && (
         <p className="gift-card__info">Obs: {item.note}</p>
@@ -38,7 +43,7 @@ export function GiftCard({ item, onSelect, onViewStores, style }: Props) {
       {/* 🔥 BOTÃO NOVO */}
       <button
         className="gift-card__button-secondary"
-        onClick={() => onViewStores(item.name)}
+        onClick={() => onViewStores(item)}
       >
         Comparar preços 🛒
       </button>
