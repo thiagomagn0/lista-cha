@@ -1,17 +1,270 @@
-.store {
+/* 🔥 OVERLAY (FUNDO ESCURO) */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
   display: flex;
-  gap: 12px;
-  margin-bottom: 12px;
-
-  background: #fff;
-  padding: 10px;
-  border-radius: 12px;
-
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  animation: overlayFade 0.25s ease;
 }
 
-.store img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
+/* 🔥 CONTAINER (BOTTOM SHEET) */
+.sheet {
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 20px;
+
+    animation: sheetEnter 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+@keyframes overlayFade {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.35);
+  }
+}
+
+@keyframes sheetEnter {
+  0% {
+    transform: translateY(100%);
+  }
+  70% {
+    transform: translateY(-8px); /* 👈 leve bounce */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* 🔥 HANDLE (BARRINHA) */
+.sheet-handle {
+  width: 40px;
+  height: 5px;
+  background: #ddd;
+  border-radius: 10px;
+  margin: 0 auto 12px;
+}
+
+/* 🔥 TÍTULO */
+.sheet-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #3a2f2a;
+}
+
+/* 🔥 SUBTÍTULO */
+.sheet-subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #7a6f6a;
+  margin-bottom: 18px;
+}
+
+/* 🔥 LISTA */
+.sheet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 🔥 ITEM (CARD DE LOJA) */
+.sheet-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: #fdfaf8;
+
+  cursor: pointer;
+
+  /* 🔥 SOMBRA SUAVE */
+   box-shadow:
+    0 2px 6px rgba(0,0,0,0.06),
+    0 8px 20px rgba(0,0,0,0.04);
+
+  /* 🔥 TRANSIÇÃO SUAVE */
+  transition: all 0.25s ease;
+}
+.content__sheet-item {
+    display: grid;
+    gap:8px;
+}
+
+/* hover desktop */
+.sheet-item:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  transform: scale(1.02); /* 👈 não interfere na animação do modal */
+}
+.sheet-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+/* 🔥 LADO ESQUERDO */
+.sheet-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex: 1; /* 👈 ocupa espaço */
+  min-width: 0; /* 👈 evita quebra bugada */
+}
+
+/* 🔥 ÍCONE */
+.sheet-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: #e9dcd4; /* tom terracota suave */
+}
+
+/* 🔥 NOME */
+.sheet-name {
+  font-weight: 600;
+  white-space: nowrap;
+      color: #777777;
+}
+
+.sheet-desc {
+  font-size: 12px;
+  color: #8c807a;
+  white-space: nowrap;
+}
+
+/* 🔥 SETA */
+.sheet-arrow {
+  font-size: 20px;
+  color: #b5aaa5;
+}
+
+/* 🔥 BOTÃO FECHAR */
+.sheet-close {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: #efe7e2;
+  color: #5c4b44;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.sheet-close:hover {
+  background: #e5d8cf;
+}
+
+/* 🔥 ANIMAÇÕES */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 📱 MOBILE EXTRA */
+@media (max-width: 480px) {
+  .sheet {
+    border-radius: 20px 20px 0 0;
+    padding: 18px 14px;
+  }
+
+  .sheet-title {
+    font-size: 16px;
+  }
+}
+/* saída overlay */
+.fade-out {
+   animation: overlayFadeOut 0.3s ease forwards !important;
+}
+
+/* saída sheet */
+.slide-down {
+  animation: sheetExit 0.3s ease forwards !important;
+}
+
+/* animações */
+@keyframes overlayFadeOut {
+  from {
+    background: rgba(0, 0, 0, 0.35);
+  }
+  to {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes sheetExit {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+/* seção */
+.sheet-section {
+  font-size: 12px;
+  font-weight: 600;
+  color: #9a8f88;
+  margin: 16px 0 6px;
+}
+
+/* logo real */
+.sheet-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+/* lado direito */
+.sheet-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  flex-shrink: 0; /* 👈 impede encolher */
+}
+
+/* texto ação */
+.sheet-action {
+  font-size: 12px;
+  color: #b5aaa5;
+  white-space: nowrap; /* 👈 ESSENCIAL */
+}
+
+/* destaque recomendado */
+.highlight {
+  background: #efe7e2;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.08),
+    0 0 0 1px rgba(0,0,0,0.03);
 }

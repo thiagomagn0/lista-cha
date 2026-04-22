@@ -1,3 +1,6 @@
+
+import "./StoreModal.css";
+import { useState } from "react";
 type Props = {
   query: string;
   onClose: () => void;
@@ -6,30 +9,98 @@ type Props = {
 export function StoresModal({ query, onClose }: Props) {
   const encoded = encodeURIComponent(query);
 
-  const google = `https://www.google.com/search?tbm=shop&hl=pt-BR&gl=BR&q=${encoded}`;
-  const ml = `https://lista.mercadolivre.com.br/${encoded}`;
-  const amazon = `https://www.amazon.com.br/s?k=${encoded}`;
+  const recommended = [
+    {
+      name: "Google Shopping",
+      url: `https://www.google.com/search?tbm=shop&hl=pt-BR&gl=BR&q=${encoded}`,
+      icon: "/icons/google.jpg",
+    },
+  ];
+
+  const stores = [
+    {
+      name: "Mercado Livre",
+      url: `https://lista.mercadolivre.com.br/${encoded}`,
+      icon: "/icons/mercado-livre.svg",
+    },
+    {
+      name: "Amazon",
+      url: `https://www.amazon.com.br/s?k=${encoded}`,
+      icon: "/icons/amazon.jpg",
+    },
+  ];
+  const [closing, setClosing] = useState(false);
+
+const handleClose = () => {
+  setClosing(true);
+
+  setTimeout(() => {
+    onClose();
+  }, 300); // 👈 TEM QUE SER IGUAL AO CSS
+};
 
   return (
-    <div className="modal">
-      <div className="modal__content">
-        <h2>Onde comprar 🛒</h2>
+   <div className={`sheet-overlay ${closing ? "fade-out" : ""}`} onClick={handleClose}>
+  <div
+    className={`sheet ${closing ? "slide-down" : ""}`}
+    onClick={(e) => e.stopPropagation()}
+  >
 
-        <div className="stores">
-          <button onClick={() => window.open(google, "_blank")}>
-            Google Shopping
-          </button>
+        <div className="sheet-handle" />
 
-          <button onClick={() => window.open(ml, "_blank")}>
-            Mercado Livre
-          </button>
+        <h2 className="sheet-title">Onde comprar 🛒</h2>
 
-          <button onClick={() => window.open(amazon, "_blank")}>
-            Amazon
+        {/* 🔥 RECOMENDADO */}
+        <p className="sheet-section">Recomendado</p>
+
+        {recommended.map((store) => (
+          <button
+            key={store.name}
+            className="sheet-item highlight"
+            onClick={() => window.open(store.url, "_blank")}
+          >
+            <div className="sheet-left">
+              <img src={store.icon} className="sheet-logo" />
+              <div>
+                <p className="sheet-name">{store.name}</p>              
+              </div>
+            </div>
+
+            <div className="sheet-right">
+              <span className="sheet-action">Abrir mapa</span>
+              <span className="sheet-arrow">›</span>
+            </div>
           </button>
+        ))}
+
+        {/* 🔥 OUTRAS LOJAS */}
+        <p className="sheet-section">Outras lojas</p>
+        <div className="content__sheet-item">
+            {stores.map((store) => (
+                <button
+                    key={store.name}
+                    className="sheet-item"
+                    onClick={() => window.open(store.url, "_blank")}
+                >
+                    <div className="sheet-left">
+                    <img src={store.icon} className="sheet-logo" />
+                    <div>
+                        <p className="sheet-name">{store.name}</p>               
+                    </div>
+                    </div>
+
+                    <div className="sheet-right">
+                    <span className="sheet-action">Abrir loja</span>
+                    <span className="sheet-arrow">›</span>
+                    </div>
+                </button>
+                ))}
         </div>
+   
 
-        <button onClick={onClose}>Fechar</button>
+        <button className="sheet-close" onClick={handleClose}>
+  Fechar
+</button>
       </div>
     </div>
   );
