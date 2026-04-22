@@ -1,6 +1,6 @@
 
 import "./StoreModal.css";
-import { useState } from "react";
+import { useEffect, useState } from "react"
 type Props = {
   query: string;
   onClose: () => void;
@@ -30,14 +30,27 @@ export function StoresModal({ query, onClose }: Props) {
     },
   ];
   const [closing, setClosing] = useState(false);
+   useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
 const handleClose = () => {
+  // 📳 vibração segura
+  if ("vibrate" in navigator) {
+    navigator.vibrate([20, 40, 20]);
+  }
+
   setClosing(true);
 
   setTimeout(() => {
     onClose();
-  }, 300); // 👈 TEM QUE SER IGUAL AO CSS
+  }, 300);
 };
+
 
   return (
    <div className={`sheet-overlay ${closing ? "fade-out" : ""}`} onClick={handleClose}>
