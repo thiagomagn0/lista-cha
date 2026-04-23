@@ -236,7 +236,7 @@ const handleViewStores = (item: GiftItem) => {
 }, []);
 
   return (
-    <div className="lista">
+    <div className="lista fade-page">
       <div className="liata__container">
 
         <header className="lista__header">

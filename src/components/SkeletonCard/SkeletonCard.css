@@ -1,0 +1,52 @@
+.skeleton-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.skeleton-title {
+  height: 16px;
+  width: 60%;
+  background: #eee;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: #eee;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.skeleton-line.short {
+  width: 40%;
+}
+
+/* shimmer effect */
+.skeleton-card,
+.skeleton-title,
+.skeleton-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-card::after,
+.skeleton-title::after,
+.skeleton-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150px;
+  height: 100%;
+  width: 150px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    left: 100%;
+  }
+}

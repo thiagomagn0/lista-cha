@@ -76,7 +76,7 @@ export default function Confirmacao() {
   };
 
   return (
-    <div className="confirmacao">
+    <div className="confirmacao fade-page">
       <div className="confirmacao__container">
         <h1 className="confirmacao__title">Confirmação de Presença</h1>
 

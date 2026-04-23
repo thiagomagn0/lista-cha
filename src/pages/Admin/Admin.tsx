@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Gift, User, Phone, Wallet, MessageCircle } from "lucide-react";
+import { SkeletonCard } from "../../components/SkeletonCard/SkeletonCard";
 import {
   collection,
   getDocs,
@@ -34,24 +35,29 @@ export default function Admin() {
   const [confirmacoes, setConfirmacoes] = useState<Confirmacao[]>([]);
 
   const { showToast } = useToast();
+const [loading, setLoading] = useState(true);
+const load = async () => {
+  setLoading(true);
 
- const load = async () => {
   const reservasSnap = await getDocs(collection(db, "reservas"));
   const confirmSnap = await getDocs(collection(db, "confirmacoes"));
 
   const reservasData = reservasSnap.docs.map((doc) => ({
     id: doc.id,
-     phone: "",
+    phone: "",
     ...doc.data(),
   })) as Reserva[];
 
   const confirmData = confirmSnap.docs.map((doc) => ({
     id: doc.id,
+    phone: "",
     ...doc.data(),
   })) as Confirmacao[];
 
   setReservas(reservasData);
   setConfirmacoes(confirmData);
+
+  setLoading(false);
 };
 const toggleConfirmacao = async (c: Confirmacao) => {
   const newStatus = c.status === "sim" ? "nao" : "sim";
@@ -87,34 +93,11 @@ const toggleConfirmacao = async (c: Confirmacao) => {
 };
 
 useEffect(() => {
-  let isMounted = true;
-
-  const loadData = async () => {
-    const reservasSnap = await getDocs(collection(db, "reservas"));
-    const confirmSnap = await getDocs(collection(db, "confirmacoes"));
-
-    if (!isMounted) return;
-
-    setReservas(
-      reservasSnap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Reserva[]
-    );
-
-    setConfirmacoes(
-      confirmSnap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Confirmacao[]
-    );
+  const fetchData = async () => {
+    await load();
   };
 
-  loadData();
-
-  return () => {
-    isMounted = false;
-  };
+  fetchData();
 }, []);
 
  
@@ -154,7 +137,7 @@ const totalGeral = pixReservas
   .reduce((acc, r) => acc + (r.price ?? 0), 0);
 
   return (
-    <div className="admin">
+    <div className="admin fade-page">
       <div className="admin__container">
         <h1 className="admin__title">Painel do Evento</h1>
 
@@ -199,47 +182,58 @@ const totalGeral = pixReservas
         <h2 className="admin__section-title">Presentes 🎁</h2>
 
         <div className="admin__list">
-          {reservas.map((r) => (
-            <div key={r.id} className="admin__card modern">
-          <div className="card-header">
-            <span className="card-item">
-              <Gift size={14} /> {r.item}
-            </span>
+          {loading ? (
+                <>
+                  <SkeletonCard />
+                  <SkeletonCard />
+                  <SkeletonCard />
+                    </>
+                  ) : (
+                    reservas.map((r) => (
+                      <div key={r.id} className="admin__card">
+                        
+              <div className="card-header">
+                <span className="card-item">
+                  <Gift size={14} /> {r.item}
+                </span>
 
-            <span className={`status ${r.status}`}>
-              {r.status}
-            </span>
-          </div>
+                <span className={`status ${r.status}`}>
+                  {r.status}
+                </span>
+              </div>
 
-          <div className="card-body">
-            <div><User size={14}/> {r.name}</div>
-            <div><Phone size={14}/> {r.phone}</div>
-          </div>
+              <div className="card-body">
+                <div><User size={14}/> {r.name}</div>
+                <div><Phone size={14}/> {r.phone}</div>
+              </div>
 
-          <div className="card-payment">
-            <Wallet size={14}/>
-            <span>
-              {r.type === "pix" ? "PIX" : "Presente"}
-            </span>
-          </div>
+              <div className="card-payment">
+                <Wallet size={14}/>
+                <span>
+                  {r.type === "pix" ? "PIX" : "Presente"}
+                </span>
+              </div>
 
-          {r.type === "pix" && (
-            <div className="card-price">
-              R$ {(r.price ?? 0).toFixed(2)}
+              {r.type === "pix" && (
+                <div className="card-price">
+                  R$ {(r.price ?? 0).toFixed(2)}
+                </div>
+              )}
+
+              <div className="card-actions">
+                <button onClick={() => togglePaymentStatus(r)}>
+                  {r.status === "pago" ? "Desmarcar" : "Marcar pago"}
+                </button>
+
+                <button onClick={() => handleDelete(r.id)}>
+                  Excluir
+                </button>
+              </div>
             </div>
-          )}
-
-          <div className="card-actions">
-            <button onClick={() => togglePaymentStatus(r)}>
-              {r.status === "pago" ? "Desmarcar" : "Marcar pago"}
-            </button>
-
-            <button onClick={() => handleDelete(r.id)}>
-              Excluir
-            </button>
-          </div>
-        </div>
-          ))}
+              ))
+                 
+              )}
+          
         </div>
 
         {/* 📅 CONFIRMAÇÕES */}

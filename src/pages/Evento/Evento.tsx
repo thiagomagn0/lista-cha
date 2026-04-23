@@ -16,7 +16,7 @@ export default function Evento() {
   };
 
   return (
-    <div className="evento">
+    <div className="evento fade-page">
       <div className="evento__container">
 
         <h1 className="evento__title">Local do Evento</h1>
